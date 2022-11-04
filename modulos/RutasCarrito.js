@@ -1,7 +1,7 @@
 const express = require("express");
 const { Router } = express;
-const contenedorCarritos = require("../ClaseCarrito.js");
-const contenedorProductos = require("../ClaseProducto.js");
+const contenedorCarritos = require("../containers/ClaseCarrito");
+const contenedorProductos = require("../containers/ClaseProducto.js");
 
 const router = Router();
 

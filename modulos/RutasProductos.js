@@ -1,6 +1,6 @@
 const express = require("express");
 const { Router } = express;
-const contenedorProductos = require("../ClaseProducto.js");
+const contenedorProductos = require("../containers/ClaseProducto.js");
 const autenticacion = require("../middlewares/AutenticacionUsuario.js");
 
 const router = Router();
