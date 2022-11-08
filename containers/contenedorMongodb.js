@@ -1,7 +1,5 @@
-const mongoose = require("mongoose");
-const config = require("../config.js");
-const productSchema = require("../models/producto.models.js");
-const cartSchema = require("../models/carrito.models.js");
+import mongoose from "mongoose";
+import { config } from "../config.js";
 
 
 
@@ -29,7 +27,7 @@ class ContenedorMongodb {
     //Crear carrito.
     async createCart(){
         try {
-            const newCart = await new this.coleccion()
+            const newCart = new this.coleccion()
 
             await newCart.save();
             console.log("carrito creado");
@@ -41,6 +39,7 @@ class ContenedorMongodb {
     //Obtener todos los items.
     async getAll(){
         try {
+            
             return await this.coleccion.find();
             
         } catch (error) {
@@ -52,6 +51,7 @@ class ContenedorMongodb {
     //Obtener items por ID.
     async getById(idItem){
         try {
+
             return await this.coleccion.find({_id: {$eq: idItem}});
         
         } catch (error) {
@@ -109,4 +109,4 @@ class ContenedorMongodb {
 }
 
 
-module.exports = ContenedorMongodb;
+export default ContenedorMongodb;

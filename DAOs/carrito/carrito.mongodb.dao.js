@@ -1,27 +1,42 @@
-const ContenedorMongodb = require("../../containers/contenedorMongodb.js");
-const cartSchema = require("../../models/carrito.models.js");
-const ProductDAOMongoDb = require("../../DAOs/producto/producto.mongodb.dao.js");
-
+import ContenedorMongodb from "../../containers/contenedorMongodb.js";
+import { cartSchema } from "../../models/carrito.models.js";
 
 class CarritoDAOMongoDb extends ContenedorMongodb{
     constructor(){
         super("carritos", cartSchema)
     }
 
-    async saveInCart(idCart, idProducto){
+    //_____________________________________________________________
+    //Guardar un producto en un determinado carrito.
+    async saveInCart(idCart, producto){
         const cart = await super.getById(idCart);
         
-        const producto = await ProductDAOMongoDb.getById(idProducto);
-        
         cart[0].productos = [...cart[0].productos, {...producto[0]}]
-
+        
         await super.update(idCart, cart[0]);
         
         return console.log("producto guardado en carrito.");
     }
+    //_____________________________________________________________
+    //Eliminar un producto de un determinado carrito.
+    async deleteProductInCart(idCart, idProducto){
+        const cart = await super.getById(idCart);
+
+        const productosNoEliminados = cart[0].productos.filter( producto => producto.id !== idProducto);
+        
+        cart[0].productos = [...productosNoEliminados];
+        
+        await super.update(idCart, cart[0]);
+    }
+    //_____________________________________________________________
+    //Listar productos de un determinado carrito.
+    async getProductInCart(idCart){
+        const cart = await super.getById(idCart);
+
+        return cart[0].productos;
+    }
 }
 
 
-const cartDAOMongodb = new CarritoDAOMongoDb();
 
-module.exports = cartDAOMongodb;
+export default CarritoDAOMongoDb;

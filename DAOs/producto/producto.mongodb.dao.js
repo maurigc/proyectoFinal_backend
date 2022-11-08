@@ -1,13 +1,12 @@
-const ContenedorMongoDb = require("../../containers/contenedorMongodb.js");
-const productSchema = require("../../models/producto.models.js");
+import ContenedorMongodb from "../../containers/contenedorMongodb.js";
+import { productSchema } from "../../models/producto.models.js";
 
-class ProductosDAOMongoDb extends ContenedorMongoDb{
+
+class ProductosDAOMongoDb extends ContenedorMongodb{
     constructor(){
         super("productos", productSchema);
     }
 }
 
 
-const ProductDAOMongoDb = new ProductosDAOMongoDb();
-
-module.exports = ProductDAOMongoDb;
+export default ProductosDAOMongoDb;

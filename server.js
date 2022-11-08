@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
+import { router as rutasProductos } from "./routes/RutasProductos.js";
+import { router as rutasCarrito } from "./routes/RutasCarrito.js";
+
 const app = express();
-const rutasProductos = require("./modulos/RutasProductos.js");
-const rutasCarrito = require("./modulos/RutasCarrito.js");
 
 ///////////////////// Midleware //////////////////////
 app.use(express.json());

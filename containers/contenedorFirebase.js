@@ -1,5 +1,6 @@
-const admin = require("firebase-admin");
-const config = require("../config.js");
+import  admin  from "firebase-admin";
+import { config } from "../config.js";
+
 
 admin.initializeApp({
     credential: admin.credential.cert(config.firebase.options)
@@ -92,6 +93,6 @@ class ContenedorFirebase{
 }
 
 
-module.exports = ContenedorFirebase;
+export default ContenedorFirebase;
 
 

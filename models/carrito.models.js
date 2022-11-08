@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import { Schema } from "mongoose";
 
 
 const cartSchema = new Schema({
@@ -37,4 +37,4 @@ const cartSchema = new Schema({
 })
 
 
-module.exports = cartSchema;
+export { cartSchema };

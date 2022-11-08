@@ -1,7 +1,7 @@
-const express = require("express");
-const { Router } = express;
-const contenedorProductos = require("../containers/ClaseProducto.js");
-const autenticacion = require("../middlewares/AutenticacionUsuario.js");
+import { Router } from "express";
+import { productosDao } from "../DAOs/index.js";
+import { autenticacion } from "../middlewares/AutenticacionUsuario.js";
+
 
 const router = Router();
 
@@ -9,7 +9,7 @@ const router = Router();
 //***************** Obtener todos los productos ****************//
 router.get("/", async(req, res) => {
 
-    const listadoDeProductos = await contenedorProductos.getAll();
+    const listadoDeProductos = await productosDao.getAll();
 
     res.status(200).json(listadoDeProductos);
 })   
@@ -18,9 +18,9 @@ router.get("/", async(req, res) => {
 router.get("/:id", async(req, res) => {
     const { id } = req.params;
 
-    const listadoDeProductos = await contenedorProductos.getAll();
+    const listadoDeProductos = await productosDao.getAll();
 
-    const productoEncontrado = listadoDeProductos.find( producto => producto.id === parseInt(id) );
+    const productoEncontrado = listadoDeProductos.find( producto => producto.id === id );
 
     productoEncontrado ? res.status(200).json(productoEncontrado) : res.status(400).json({msjError: `No se encontrò ningun producto con ID:${id}`});
     
@@ -28,19 +28,23 @@ router.get("/:id", async(req, res) => {
 
 //***************** Agregar un producto nuevo ****************//
 router.post("/", autenticacion, async(req, res) => {
-    const productoParaGuardar = req.body;
+    try {
+        const productoParaGuardar = req.body;
     
-    await contenedorProductos.save(productoParaGuardar);
+        await productosDao.save(productoParaGuardar);
 
-    res.status(200).json({msjExito: `Producto guardado con èxito.`})
+        res.status(200).json({msjExito: `Producto guardado con èxito.`})
+    } catch (error) {
+        res.status(400).json({msjError: `No se pudo guardar el producto. ${error}`});
+    }
+    
 })
 
 //***************** Actualizar algùn producto ya guardado ****************//
 router.put("/:id", autenticacion, async(req, res) => {
     const { id } = req.params;
-    const { name, description, price, code, urlImagen, stock } = req.body;
-
-    await contenedorProductos.update(id, name, description, price, code, urlImagen, stock);
+    
+    await productosDao.update(id, req.body);
 
     res.status(200).json({msjExito: `Producto con ID:${id} se actualizó con éxito.`})
 })
@@ -49,12 +53,12 @@ router.put("/:id", autenticacion, async(req, res) => {
 router.delete("/:id", autenticacion, async(req, res) => {
     const { id } = req.params;
 
-    const todosProductos = await contenedorProductos.getAll();
+    const todosProductos = await productosDao.getAll();
 
-    const idEncontrado = todosProductos.some( producto => producto.id === parseInt(id));
+    const idEncontrado = todosProductos.some( producto => producto.id === id);
 
     if(idEncontrado){
-        await contenedorProductos.deleteById(parseInt(id));
+        await productosDao.deleteById(id);
 
         res.status(200).json({msjExito: `Producto con ID:${id} fue eliminado con éxito.`})
     }else{
@@ -64,4 +68,4 @@ router.delete("/:id", autenticacion, async(req, res) => {
     // 
 })
 
-module.exports = router;
+export { router };
