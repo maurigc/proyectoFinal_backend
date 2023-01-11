@@ -1,6 +1,6 @@
 const config = {
     mongoDb: {
-        url: "mongodb://localhost:27017/Ecommerce",
+        url: process.env.URL_MONGO_ATLAS,
         options: {
             useNewUrlParser: true,
             useUnifiedTopology: true
