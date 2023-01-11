@@ -1,0 +1,153 @@
+.main-body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.container-main-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+/* ------------------------- CARD STYLE --------------------------- */
+
+.container-main-cart{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.elcontenedor{
+    margin: 20px 30px;
+}
+
+
+/* ------------------------- NAV STYLE --------------------------- */
+ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.item-nav{
+    margin: 10px 40px;
+}
+
+.anchor-nav{
+    text-decoration: none;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: sans-serif;
+    color: blueviolet;
+}
+
+.main-nav{
+    margin: 0;
+    padding: .5px 0px;
+    background-color: rgb(190, 190, 190);
+}
+
+
+/* ------------------------- TITLE STYLE --------------------------- */
+.title-container{
+    padding: 100px;
+    font-size: 40px;
+    width: 40%;
+}
+
+.title{
+    padding: 0px;
+    margin: 0px;
+    color: blueviolet;
+    font-family: sans-serif;
+    font-weight: 900;
+}
+
+.span-title{
+    color: black;
+}
+
+
+/* ------------------------- FORM STYLE --------------------------- */
+.form-container{
+    height: 100%;
+    width: 45%;
+    border-radius: 30px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, .4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 70%;
+    width: 90%;
+}
+
+/* ------------------------- INPUT & LABEL STYLE --------------------------- */
+.label-form{
+    font-weight: bolder;
+    font-size: 25px;
+    color: rgb(65, 64, 64);
+}
+
+.input-form{
+    border-radius: 15px;
+    height: 55px;
+    width: 100%;
+    background-color: aliceblue;
+    border: 1px solid rgb(221, 221, 221);
+    padding: 0 0 0 10px;
+    font-size: 19px;
+    
+}
+
+/* ------------------------- BUTTON FORM STYLE --------------------------- */
+.container-button-form{
+    margin: 20px 0 20px 0;
+}
+
+.button-form{
+    border-radius: 15px;
+    height: 55px;
+    width: 250px;
+    padding: 10px 40px;
+    color: aliceblue;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: blueviolet;
+    border: 1px solid blueviolet;
+}
+
+/* ------------------------- P-FORM STYLE --------------------------- */
+
+.p-form{
+    font-size: 19px;
+    font-weight: 600;
+    color: rgb(106, 106, 106);
+}
+
+.linked-word{
+    cursor: pointer;
+    text-decoration: none;
+    color: blueviolet;
+
+}
+
+.linked-word:hover{
+    color: rgb(106, 106, 106);
+}

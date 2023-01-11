@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+<body>
+    
+    <%- include("../partials/loggedNav.ejs") %>
+    <div class="container-main-cart">
+    <% listadoDeProductos.forEach( producto => { %>
+        
+        <div id=<%= producto._id %> class="elcontenedor">
+            
+            
+
+            <label for="nombre"></label>
+            <p class="nombre" name="nombre"> <%= producto.nombre %> </p>
+            
+            <label for="precio"></label>
+            <p class="precio" name="precio"> <%= producto.precio %> </p>
+            <button class="boton">Agregar al carrito</button>
+
+        </div>
+        
+    <%})                                         %>
+    </div>
+
+    <script src="../../main.js"></script>
+</body>
+</html>

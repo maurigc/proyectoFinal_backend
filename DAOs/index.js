@@ -1,5 +1,7 @@
+
 let productosDao
 let carritosDao
+let usuariosDao
 
 switch ("mongodb") {
     case 'firebase':
@@ -13,12 +15,14 @@ switch ("mongodb") {
     case 'mongodb':
         const {default : productosDaoMongo} = await import("./producto/producto.mongodb.dao.js");    
         const {default : carritoDaoMongo} = await import("./carrito/carrito.mongodb.dao.js");
+        const {default : UsuariosDAOMongo} = await import("./usuario/usuario.mongodb.js");
 
         productosDao = new productosDaoMongo();
         carritosDao = new carritoDaoMongo();
+        usuariosDao = new UsuariosDAOMongo();
 
         break
     
 }
 
-export { productosDao, carritosDao };
+export { productosDao, carritosDao, usuariosDao };

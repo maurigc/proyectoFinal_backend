@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { config } from "../config.js";
+import { logConsola, logWarn } from "../scripts/log4js.js";
+
 
 
 
@@ -14,9 +16,9 @@ class ContenedorMongodb {
         try {
             await mongoose.connect(config.mongoDb.url, config.mongoDb.options) 
 
-            console.log("base de datos conectada");
+            logConsola.info("base de datos conectada");
         } catch (error) {
-            console.log(error)
+            logWarn.error(error)
         }
 
     }
@@ -30,9 +32,10 @@ class ContenedorMongodb {
             const newCart = new this.coleccion()
 
             await newCart.save();
-            console.log("carrito creado");
+
+            return newCart.id;
         } catch (error) {
-            console.log(error);
+            logWarn.error(error);
         }
     }
     //_____________________________________________________________
@@ -43,7 +46,7 @@ class ContenedorMongodb {
             return await this.coleccion.find();
             
         } catch (error) {
-            console.log(error);
+            logWarn.error(error);
         }
         
     }
@@ -55,7 +58,7 @@ class ContenedorMongodb {
             return await this.coleccion.find({_id: {$eq: idItem}});
         
         } catch (error) {
-            console.log(error);
+            logWarn.error(error);
         }
     }
     //_____________________________________________________________
@@ -65,9 +68,9 @@ class ContenedorMongodb {
             const newItem = new this.coleccion(item)
 
             await newItem.save()
-            
+
         } catch (error) {
-            console.log(error);
+            logWarn.error(error);
         }
     }
     //_____________________________________________________________
@@ -76,9 +79,9 @@ class ContenedorMongodb {
         try {
             await this.coleccion.updateOne({_id: {$eq: idItem}}, {$set: nuevaConfig});
 
-            return console.log("actualizado con éxito.");
+            return logConsola.info("actualizado con éxito.");
         } catch (error) {
-            console.log(error);
+            logWarn.error(error);
         }
     }
     //_____________________________________________________________
@@ -87,9 +90,9 @@ class ContenedorMongodb {
         try {
             await this.coleccion.deleteOne({id: {$eq: idItem}});
        
-            return console.log("eliminado con éxito.");
+            return logConsola.info("eliminado con éxito.");
         } catch (error) {
-            console.log(error);
+            logWarn.error(error);
         }
         
     }
@@ -99,9 +102,9 @@ class ContenedorMongodb {
         try {
             await this.coleccion.deleteMany({});
 
-            return console.log("Se eliminaron todos con éxito.")
+            return logConsola.info("Se eliminaron todos con éxito.")
         } catch (error) {
-            console.log(error);
+            logWarn.error(error);
         }
         
     }

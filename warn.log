@@ -1,0 +1,2 @@
+[2023-01-10T22:12:59.320] [ERROR] fileWarn - TypeError: cluster.isPrimary is not a function
+    at file:///C:/Users/mauri/Desktop/proyectoFinal_%20backend/server.js:17:20

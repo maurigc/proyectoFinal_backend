@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+<body>
+    
+    <%- include("../partials/loggedNav.ejs") %>
+
+    
+    <h2>Email: <span class="info"><%= usuario.username %></span></h2>
+    <hr style="width: 100%;">
+    <h2>Nombre: <span class="info"><%= usuario.nombre %></span></h2>
+    <hr style="width: 100%;">
+    <h2>Direccion: <span class="info"><%= usuario.direccion %></span></h2>
+    <hr style="width: 100%;">
+    <h2>Edad: <span class="info"><%= usuario.edad %></span></h2>
+    <hr style="width: 100%;">
+    <h2>Telefono: <span class="info">+<%= usuario.telefono %></span></h2>
+    <hr style="width: 100%;">
+
+
+    <script src="../../main.js"></script>
+</body>
+</html>

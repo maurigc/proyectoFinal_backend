@@ -1,21 +1,48 @@
-import express from "express";
-import { router as rutasProductos } from "./routes/RutasProductos.js";
-import { router as rutasCarrito } from "./routes/RutasCarrito.js";
+import { app } from './app.js';
+import dotenv from 'dotenv';
+import cluster from 'cluster';
+import os from 'os';
+import { logWarn, logConsola } from './scripts/log4js.js';
 
-const app = express();
+dotenv.config();
 
-///////////////////// Midleware //////////////////////
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const numCpus = os.cpus().length;
+const modo = "";
 
 ///////////////////// Puerto //////////////////////
-const PORT = 8080;
-app.listen(PORT, (err) => {
-    err ? console.log(`Imposible conectar al servidor`) : console.log(`Servidor conectado al puerto ${PORT} correctamente.`);
-})
+const PORT = process.env.PORT || 8080;
 
-///////////////////// Ruta raiz para Productos //////////////////////
-app.use("/productos", rutasProductos);
+if(modo === "cluster"){
+    try {
+        if(cluster.isPrimary){
+            
+            for (let i = 0; i < numCpus; i++) {
+                cluster.fork();
+                    
+            }
+                
+            
+        }else{
+            app.listen(PORT, (err) => {
+                err ? logWarn.error(`Imposible conectar al servidor`) : logConsola.info(`Servidor conectado al puerto ${PORT} correctamente.`);
+            })
+        }
+        
+    } catch (error) {
+        logWarn.error(error);
+    }
+}else{
+    try {
+        app.listen(PORT, (err) => {
+            err ? logWarn.error(`Imposible conectar al servidor`) : logConsola.info(`Servidor conectado al puerto ${PORT} correctamente.`);
+        })
+        
+    } catch (error) {
+        logWarn.error(error);
+    }
+}
 
-///////////////////// Ruta raiz para Carrito //////////////////////
-app.use("/carrito", rutasCarrito)
+
+
+
+
