@@ -7,16 +7,16 @@
     
     <%- include("../partials/loggedNav.ejs") %>
 
-    <% if(productos){                           %>
-    <% productos.forEach( producto => {      %>
-        <p><%= producto.nombre %></p>
-    <% })                                %>
-    <% }else{                            %>
-        <h2>No hay productos en el carrito.</h2>
-    <% }                                 %>
+    <% if(productos.length > 0){                                             %>
+        <%  productos.forEach( producto => {                          %>
+                <p><%= producto.nombre %></p>
+        <%  })                                                       %>
+        <button id="finalizarCompra">Finalizar la compra</button>                                                             
+    <% }else{                                                     %>      
+        <h2>No hay productos en el carrito.</h2>  
+    <% }                                                          %>
 
-    <button id="finalizarCompra">Finalizar la compra</button>
-
+     
     
     <script src="../../main.js"></script>
 </body>

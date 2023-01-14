@@ -33,6 +33,9 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
+    },
+    idCarrito: {
+        type: String
     }
 })
 

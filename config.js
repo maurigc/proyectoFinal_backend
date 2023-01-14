@@ -1,6 +1,6 @@
 const config = {
     mongoDb: {
-        url: process.env.URL_MONGO_ATLAS,
+        url: process.env.URL_MONGO_LOCAL,
         options: {
             useNewUrlParser: true,
             useUnifiedTopology: true

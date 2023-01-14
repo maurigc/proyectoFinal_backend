@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { carritosDao, productosDao } from "../DAOs/index.js";
+import { carritosDao, productosDao, ordenesDao } from "../DAOs/index.js";
 import { transport } from "../scripts/nodemailer.js";
 import { cliente } from '../scripts/twilio.js';
 import { logWarn } from "../scripts/log4js.js";
@@ -8,29 +8,59 @@ import { checkAuthenticated } from "../middlewares/checkAuthenticated.js";
 
 const router = Router();
 
+router.post("/productos", async(req, res) => {
+    try {
+        const { idCarrito } = req.session.user;
+        const { id } = req.body
+        
+        const productoEncontrado = await productosDao.getById(id);
+    
+        await carritosDao.saveInCart(idCarrito, productoEncontrado);
+
+        const productosEnCarrito = await carritosDao.getById(idCarrito);
+
+        req.session.productos = productosEnCarrito[0].productos
+
+    } catch (error) {
+        logWarn.error(error);
+    }
+
+})
+
+
 router.post("/finalizarCompra", async(req, res) => {
     try {
+        const cart = await carritosDao.getById(req.session.user.idCarrito)
         
+        const generarOrden = {
+            buyer: req.session.user,
+            order: cart[0].productos
+        }
+
+        await ordenesDao.save(generarOrden);
+
+        await carritosDao.deleteProductsInCart(req.session.user.idCarrito);
+
         // Opciones para el envio de mail.
         const mailOptions = {
             from: 'Ecommerce-c32125',
-            to: req.session.username,
-            subject: `Nuevo pedido de ${req.session.nombre}`,
-            html: crearHtmlMail(req.session.productos)
+            to: req.session.user.username,
+            subject: `Nuevo pedido de ${req.session.user.nombre}`,
+            html: crearHtmlMail(cart[0].productos)
         }
     
         // Opciones para el envio de whatsapp.
         const opcionesWhatsapp = {
-            body: crearBodyWhatsapp(req.session.productos),
+            body: crearBodyWhatsapp(cart[0].productos),
             from: 'whatsapp:+14155238886',
-            to: `whatsapp:+${req.session.telefono}`
+            to: `whatsapp:+${req.session.user.telefono}`
         }
     
         // Opciones para el envio de mensaje de texto.
         const opcionesTexto = {
             body: 'Su pedido ha sido recibido con éxito, está siendo preparado.',
             from: '+13022148842',
-            to: `+${req.session.telefono}`,
+            to: `+${req.session.user.telefono}`,
         }
     
     
@@ -49,8 +79,10 @@ router.post("/finalizarCompra", async(req, res) => {
 
 // ***************** Renderiza el carrito ****************//
 router.get("/session", checkAuthenticated, async(req, res) => {
+
+    const productos = await carritosDao.getProductInCart(req.session.user.idCarrito);
     
-    res.render("pages/cartIndex", {productos: req.session.productos})
+    res.render("pages/cartIndex", {productos: productos})
 })
 
 
@@ -132,14 +164,6 @@ router.post("/:id/productos", async(req, res) => {
 
         if(idEncontrado){
             await carritosDao.saveInCart(idCarrito, producto);
-            
-            if(!req.session.productos){
-                req.session.productos = [];
-                
-                req.session.productos.push(producto[0])
-            }else{
-                req.session.productos.push(producto[0])
-            }
     
             // res.render('pages/cartIndex', {productos: req.session.producto});
             res.status(200).json({msjExito: `Producto con ID:${idProducto} se guardó con éxito en el carrito con ID:${idCarrito}.`})

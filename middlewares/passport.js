@@ -1,6 +1,6 @@
 import passport from "passport";
 import passportLocal from "passport-local";
-import { usuariosDao } from "../DAOs/index.js";
+import { usuariosDao,carritosDao } from "../DAOs/index.js";
 import { comparar, encriptar } from "../scripts/encritptarContraseña.js";
 import { transport } from "../scripts/nodemailer.js";
 import { logWarn } from "../scripts/log4js.js";
@@ -19,7 +19,6 @@ passport.use("login", new LocalStrategy({ passReqToCallback: true }, async(req, 
             const validarPassword = comparar(user, password);
     
             if(validarPassword){
-                
                 return done(null, user);
     
             }else{
@@ -46,6 +45,8 @@ passport.use("register", new LocalStrategy({ passReqToCallback: true }, async(re
         if(user){
             return done(null, false);
         }else{
+            const idCarrito = await carritosDao.createCart();
+
             const newUser = {
                 _id: `${usuarios.length === 0 ? 1 : usuarios.length + 1}`,
                 username,
@@ -54,7 +55,8 @@ passport.use("register", new LocalStrategy({ passReqToCallback: true }, async(re
                 direccion: req.body.direccion,
                 edad: req.body.edad,
                 telefono: req.body.telefono,
-                avatar: req.body.avatar
+                avatar: req.body.avatar,
+                idCarrito: idCarrito
             }
     
             await usuariosDao.save(newUser);

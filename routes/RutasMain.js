@@ -11,10 +11,12 @@ const router = Router();
 router.get("/info", async(req, res) => {
     const usuarios = await usuariosDao.getAll();
 
-    const usuario = usuarios.find( user => user.username === req.session.username);
+    const usuario = usuarios.find( user => user.username === req.session.user.username);
 
     res.render("pages/infoIndex", {usuario})
 })
+
+
 
 //***************** Ruta que renderiza formulario para ingresar a la app ****************//
 router.get("/", (req, res) => {
@@ -43,9 +45,8 @@ router.get("/registrar", (req, res) => {
 router.post("/login", passport.authenticate("login", {
     failureRedirect: "/registrar"
 }), (req, res) => {
-    req.session.nombre = req.user.nombre;
-    req.session.username = req.user.username;
-    req.session.telefono = req.user.telefono;
+
+    req.session.user = req.user;
 
     res.redirect("/productos/")
 })

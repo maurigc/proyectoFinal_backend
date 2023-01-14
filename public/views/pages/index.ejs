@@ -11,14 +11,15 @@
         
         <div id=<%= producto._id %> class="elcontenedor">
             
-            
+            <img width="150px" height="150px" src=<%= producto.urlImagen %>>
 
             <label for="nombre"></label>
-            <p class="nombre" name="nombre"> <%= producto.nombre %> </p>
+            <p class="p-producto size" name="nombre"> <%= producto.nombre %> </p>
             
             <label for="precio"></label>
-            <p class="precio" name="precio"> <%= producto.precio %> </p>
-            <button class="boton">Agregar al carrito</button>
+            <p class="p-producto" name="precio"> $<%= producto.precio %> </p>
+            
+            <button class="boton-agregar">Agregar al carrito</button>
 
         </div>
         

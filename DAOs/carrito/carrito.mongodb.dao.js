@@ -25,13 +25,13 @@ class CarritoDAOMongoDb extends ContenedorMongodb{
     }
     //_____________________________________________________________
     //Eliminar un producto de un determinado carrito.
-    async deleteProductInCart(idCart, idProducto){
+    async deleteProductsInCart(idCart){
         try {
             const cart = await super.getById(idCart);
     
-            const productosNoEliminados = cart[0].productos.filter( producto => producto.id !== idProducto);
+            // const productosNoEliminados = cart[0].productos.filter( producto => producto.id !== idProducto);
             
-            cart[0].productos = [...productosNoEliminados];
+            cart[0].productos = [];
             
             await super.update(idCart, cart[0]);
             
@@ -44,7 +44,7 @@ class CarritoDAOMongoDb extends ContenedorMongodb{
     async getProductInCart(idCart){
         try {
             const cart = await super.getById(idCart);
-    
+            
             return cart[0].productos;
             
         } catch (error) {

@@ -1,2 +1,7 @@
 [2023-01-10T22:12:59.320] [ERROR] fileWarn - TypeError: cluster.isPrimary is not a function
     at file:///C:/Users/mauri/Desktop/proyectoFinal_%20backend/server.js:17:20
+[2023-01-13T16:14:43.940] [ERROR] fileWarn - TypeError: Cannot read properties of undefined (reading 'productos')
+    at CarritoDAOMongoDb.getProductInCart (file:///C:/Users/mauri/Desktop/proyectoFinal_%20backend/DAOs/carrito/carrito.mongodb.dao.js:48:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async file:///C:/Users/mauri/Desktop/proyectoFinal_%20backend/routes/RutasCarrito.js:52:23
+
