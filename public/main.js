@@ -30,6 +30,10 @@ const containerCart = document.querySelectorAll(".container-main-cart div");
 
 if(botonFinalizarCompra){
     botonFinalizarCompra.addEventListener("click", async() => {
+        setTimeout( () => {
+            location.href = "/productos/"
+        }, 2000);
+        
 
         await fetch("/carrito/finalizarCompra/",{
             method: 'POST',
@@ -39,7 +43,7 @@ if(botonFinalizarCompra){
             }
         });
 
-        location.href = "/productos/"
+        
     })
 }
 

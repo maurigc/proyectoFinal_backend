@@ -5,3 +5,79 @@
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
     at async file:///C:/Users/mauri/Desktop/proyectoFinal_%20backend/routes/RutasCarrito.js:52:23
 
+[2023-01-17T00:00:55.563] [ERROR] fileWarn - RestException [Error]: Authenticate
+    at success (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\asap\asap.js:40:19)
+    at flush (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2023-01-17T00:12:02.736] [ERROR] fileWarn - RestException [Error]: Authenticate
+    at success (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\asap\asap.js:40:19)
+    at flush (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2023-01-17T00:17:22.880] [ERROR] fileWarn - RestException [Error]: Authenticate
+    at success (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\asap\asap.js:40:19)
+    at flush (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2023-01-17T01:12:33.277] [ERROR] fileWarn - MongoServerError: E11000 duplicate key error collection: test.usuarios index: _id_ dup key: { _id: "2" }
+    at C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:520:28)
+    at processIncomingData (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:389:12) {
+  index: 0,
+  code: 11000,
+  keyPattern: { _id: 1 },
+  keyValue: { _id: '2' },
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2023-01-17T22:09:03.342] [ERROR] fileWarn - MongoServerError: E11000 duplicate key error collection: test.usuarios index: _id_ dup key: { _id: "3" }
+    at C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:520:28)
+    at processIncomingData (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (C:\Users\mauri\Desktop\proyectoFinal_ backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:389:12) {
+  index: 0,
+  code: 11000,
+  keyPattern: { _id: 1 },
+  keyValue: { _id: '3' },
+  [Symbol(errorLabels)]: Set(0) {}
+}

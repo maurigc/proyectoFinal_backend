@@ -8,17 +8,23 @@ import { checkAuthenticated } from "../middlewares/checkAuthenticated.js";
 
 const router = Router();
 
+
+// ***************** Guarda los productos en el carrito ****************//
 router.post("/productos", async(req, res) => {
     try {
         const { idCarrito } = req.session.user;
         const { id } = req.body
         
+        // Buscamos productos por id
         const productoEncontrado = await productosDao.getById(id);
-    
+        
+        // Guardamos el producto en el carrito
         await carritosDao.saveInCart(idCarrito, productoEncontrado);
-
+        
+        // Obtenemos todos los productos del carrito
         const productosEnCarrito = await carritosDao.getById(idCarrito);
-
+        
+        // Guarda los productos del carrito en la session
         req.session.productos = productosEnCarrito[0].productos
 
     } catch (error) {
@@ -27,18 +33,18 @@ router.post("/productos", async(req, res) => {
 
 })
 
-
+// ***************** Finaliza la compra ****************//
 router.post("/finalizarCompra", async(req, res) => {
     try {
         const cart = await carritosDao.getById(req.session.user.idCarrito)
-        
+        // Se crea la orden con el comprador y los items
         const generarOrden = {
             buyer: req.session.user,
             order: cart[0].productos
         }
-
+        //Guarda la orden en la db
         await ordenesDao.save(generarOrden);
-
+        // Elimina los items del carrito ya comprado.
         await carritosDao.deleteProductsInCart(req.session.user.idCarrito);
 
         // Opciones para el envio de mail.
@@ -63,7 +69,7 @@ router.post("/finalizarCompra", async(req, res) => {
             to: `+${req.session.user.telefono}`,
         }
     
-    
+        // Envia mail y mensaje de exito en la compra
         await transport.sendMail(mailOptions);
     
         await cliente.messages.create(opcionesWhatsapp);
@@ -79,10 +85,14 @@ router.post("/finalizarCompra", async(req, res) => {
 
 // ***************** Renderiza el carrito ****************//
 router.get("/session", checkAuthenticated, async(req, res) => {
-
-    const productos = await carritosDao.getProductInCart(req.session.user.idCarrito);
-    
-    res.render("pages/cartIndex", {productos: productos})
+    try {
+        const productos = await carritosDao.getProductInCart(req.session.user.idCarrito);
+        
+        res.render("pages/cartIndex", {productos: productos})
+        
+    } catch (error) {
+        logWarn.error(error);
+    }
 })
 
 
